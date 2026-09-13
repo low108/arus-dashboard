@@ -1,0 +1,9 @@
+{
+  "fixture": "synthetic",
+  "institution": "Meridian Bank",
+  "currency": "MYR",
+  "opening_balance": "1000.00",
+  "credits": "250.00",
+  "debits": "150.00",
+  "closing_balance": "1100.00"
+}

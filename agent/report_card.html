@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #faf8f4; }
+  body { font-family: "IBM Plex Sans", system-ui, sans-serif; }
+  .card { width: 640px; box-sizing: border-box; background: #faf8f4; color: #1c1a17;
+          padding: 44px 48px 36px 48px; display: flex; flex-direction: column; gap: 34px; }
+  .eyebrow { font-size: 14px; letter-spacing: 0.09em; text-transform: uppercase; color: #8a837a; }
+  .headline { font-family: 'Instrument Serif', Georgia, serif; font-size: 42px;
+              line-height: 1.05; letter-spacing: -0.01em; }
+  .reveal { display: flex; flex-direction: column; gap: 26px;
+            border-top: 1.5px solid #1c1a17; border-bottom: 1.5px solid #1c1a17;
+            padding: 30px 0 34px 0; }
+  .lbl { font-size: 16px; color: #8a837a; }
+  .naive { font-family: 'Instrument Serif', Georgia, serif; font-size: 40px;
+           line-height: 1; color: oklch(0.48 0.12 30); }
+  .truth { font-family: 'Instrument Serif', Georgia, serif; font-size: 78px; line-height: 1;
+           letter-spacing: -0.02em; color: oklch(0.44 0.11 155); }
+  .delta { font-size: 18px; line-height: 1.45; max-width: 460px; text-wrap: pretty; }
+  .section { display: flex; flex-direction: column; gap: 18px; }
+  .exrow { display: flex; gap: 16px; align-items: baseline; }
+  .exicon { font-size: 22px; line-height: 1.2; width: 30px; flex-shrink: 0; }
+  .examt { font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; min-width: 128px; }
+  .exlabel { font-size: 17px; font-weight: 500; }
+  .exwhy { font-size: 15px; line-height: 1.4; color: #8a837a; }
+  .check { font-size: 14px; font-weight: 400; color: #9c6b12; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 40px; }
+  .cat { display: flex; justify-content: space-between; align-items: baseline;
+         border-bottom: 1px solid #e6e1d8; padding-bottom: 7px; }
+  .catname { font-size: 17px; }
+  .caticon { display: inline-block; width: 26px; }
+  .catamt { font-family: 'Instrument Serif', Georgia, serif; font-size: 20px; }
+  .muted { color: #8a837a; }
+  .band { background: #1c1a17; color: #faf8f4; padding: 24px 26px;
+          display: flex; flex-direction: column; gap: 7px; }
+  .bandlbl { font-size: 16px; color: #a8a199; }
+  .bandline { font-family: 'Instrument Serif', Georgia, serif; font-size: 27px;
+              line-height: 1.25; text-wrap: pretty; }
+  .foot { font-size: 13px; line-height: 1.5; color: #a09890; }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div class="eyebrow">{{period_label}} &nbsp;&middot;&nbsp; {{account_count}} accounts &nbsp;&middot;&nbsp; {{transaction_count}} payments</div>
+    <div class="headline">{{headline}}</div>
+  </div>
+
+  <div class="reveal">
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      <div class="lbl">Add up every payment and it looks like</div>
+      <div class="naive">{{currency}} {{naive_spending}}</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <div class="lbl">You actually spent</div>
+      <div class="truth">{{currency}} {{true_spending}}</div>
+    </div>
+    <div class="delta">The other <strong style="font-weight: 600;">{{currency}} {{overstated_by}}</strong> was counted twice, or was never spending in the first place.</div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Where the extra came from</div>
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+{{exclusions}}
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="eyebrow">Where it went</div>
+    <div class="grid">
+{{categories}}
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="bandlbl">Money in {{currency}} {{income}} &nbsp;&middot;&nbsp; Real spending {{currency}} {{true_spending}}</div>
+    <div class="bandline">You are {{currency}} {{position_change}} better off than when the month started.</div>
+  </div>
+
+  <div class="foot">{{coverage_note}}<br/>{{footer_note}}</div>
+
+</div>
+</body>
+</html>
